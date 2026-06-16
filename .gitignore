@@ -1,0 +1,17 @@
+.DS_Store
+.idea/
+.vscode/
+
+# Go build outputs
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Go workspace/cache
+go.work
+go.work.sum
+.gocache/
