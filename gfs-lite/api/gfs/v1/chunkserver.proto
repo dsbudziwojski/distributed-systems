@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package gfs.v1;
+
+option go_package = "github.com/dsbudziwojski/gfs-lite/gen/gfs/v1;gfsv1";
+
+service ChunkService {
+  rpc WriteChunk(WriteChunkRequest) returns (WriteChunkResponse);
+  rpc ReadChunk(ReadChunkRequest) returns (ReadChunkResponse);
+}
+
+message WriteChunkRequest {
+  string chunk_handle = 1;
+  int64 offset = 2;
+  string data = 3;
+}
+
+message WriteChunkResponse {
+}
+
+message ReadChunkRequest {
+  string chunk_handle = 1;
+  int64 offset = 2;
+  int64 length = 3;
+}
+
+message ReadChunkResponse {
+  string data = 1;
+}
