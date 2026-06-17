@@ -1,9 +1,9 @@
 package main
 
 import (
+	"flag"
 	"log"
 	"net"
-	"os"
 
 	gfsv1 "github.com/dsbudziwojski/gfs-lite/gen/gfs/v1"
 	"github.com/dsbudziwojski/gfs-lite/internal/master"
@@ -11,12 +11,10 @@ import (
 )
 
 func main() {
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = ":8000"
-	}
+	addr := flag.String("addr", ":7000", "master listen address")
+	flag.Parse()
 
-	lis, err := net.Listen("tcp", port)
+	lis, err := net.Listen("tcp", *addr)
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
@@ -25,6 +23,6 @@ func main() {
 	masterServer := master.NewServer()
 	gfsv1.RegisterMasterServiceServer(server, masterServer)
 
-	log.Println("gfsmaster listening on " + port)
+	log.Println("gfsmaster listening on " + *addr)
 	log.Fatal(server.Serve(lis))
 }
