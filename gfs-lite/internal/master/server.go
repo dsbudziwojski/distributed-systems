@@ -2,10 +2,20 @@ package master
 
 import (
 	"context"
+	"log"
 	"sync"
 
 	gfsv1 "github.com/dsbudziwojski/gfs-lite/gen/gfs/v1"
+	"github.com/google/uuid"
 )
+
+func uuidMaker() string {
+	id, err := uuid.NewRandom()
+	if err != nil {
+		log.Fatal(err)
+	}
+	return "cs-" + id.String()
+}
 
 type Server struct {
 	gfsv1.UnimplementedMasterServiceServer
@@ -20,12 +30,16 @@ func NewServer() *Server {
 }
 
 func (s *Server) RegisterChunkServer(ctx context.Context, in *gfsv1.RegisterChunkServerRequest) (*gfsv1.RegisterChunkServerResponse, error) {
-	id, ip := in.GetServerId(), in.GetAddress()
+	ip := in.GetAddress()
+	id := uuidMaker()
 	s.mu.Lock()
 	defer s.mu.Unlock()
 
 	s.chunkServers[id] = ip
-	return &gfsv1.RegisterChunkServerResponse{Accepted: true}, nil
+	return &gfsv1.RegisterChunkServerResponse{
+		Accepted: true,
+		ServerId: id,
+	}, nil
 }
 
 func (s *Server) GetClusterStatus(ctx context.Context, in *gfsv1.GetClusterStatusRequest) (*gfsv1.GetClusterStatusResponse, error) {

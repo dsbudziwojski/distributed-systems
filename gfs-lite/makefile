@@ -19,7 +19,7 @@ chunk:
 	go run ./cmd/gfschunk --master localhost:8000 --addr localhost:8100
 
 status:
-	go run ./cmd/gfsctl --master localhost:8200
+	go run ./cmd/gfsctl --master localhost:8000 --chunk localhost:8100
 
 clean-data:
 	rm -rf data

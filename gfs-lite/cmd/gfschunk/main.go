@@ -2,10 +2,8 @@ package main
 
 import (
 	"context"
-	"crypto/rand"
 	"flag"
 	"log"
-	"math/big"
 	"net"
 	"time"
 
@@ -14,13 +12,6 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 )
-
-func nrand() string {
-	max := big.NewInt(int64(1) << 62)
-	bigx, _ := rand.Int(rand.Reader, max)
-	x := bigx.Int64()
-	return string(rune(x))
-}
 
 func main() {
 	addr := flag.String("addr", ":8100", "chunk server listen address")
@@ -52,13 +43,13 @@ func main() {
 	defer cancel()
 
 	out, err := client.RegisterChunkServer(ctx, &gfsv1.RegisterChunkServerRequest{
-		Address:  *addr,
-		ServerId: nrand(),
+		Address: *addr,
 	})
 
 	if err != nil {
 		log.Fatal(err)
 	}
 	log.Printf("registration accepted: %v", out.Accepted)
+	log.Printf("id: %v", out.ServerId)
 	log.Fatal(server.Serve(lis))
 }

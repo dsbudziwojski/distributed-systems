@@ -10,12 +10,12 @@ service MasterService {
 }
 
 message RegisterChunkServerRequest {
-	string server_id = 1;
-	string address = 2;
+	string address = 1;
 }
 
 message RegisterChunkServerResponse {
-	bool accepted = 1;
+	string server_id = 1;
+	bool accepted = 2;
 }
 
 message GetClusterStatusRequest {}

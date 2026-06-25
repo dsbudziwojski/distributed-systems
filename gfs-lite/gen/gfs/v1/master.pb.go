@@ -23,8 +23,7 @@ const (
 
 type RegisterChunkServerRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ServerId      string                 `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
-	Address       string                 `protobuf:"bytes,2,opt,name=address,proto3" json:"address,omitempty"`
+	Address       string                 `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -59,13 +58,6 @@ func (*RegisterChunkServerRequest) Descriptor() ([]byte, []int) {
 	return file_api_gfs_v1_master_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *RegisterChunkServerRequest) GetServerId() string {
-	if x != nil {
-		return x.ServerId
-	}
-	return ""
-}
-
 func (x *RegisterChunkServerRequest) GetAddress() string {
 	if x != nil {
 		return x.Address
@@ -75,7 +67,8 @@ func (x *RegisterChunkServerRequest) GetAddress() string {
 
 type RegisterChunkServerResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Accepted      bool                   `protobuf:"varint,1,opt,name=accepted,proto3" json:"accepted,omitempty"`
+	ServerId      string                 `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
+	Accepted      bool                   `protobuf:"varint,2,opt,name=accepted,proto3" json:"accepted,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -108,6 +101,13 @@ func (x *RegisterChunkServerResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use RegisterChunkServerResponse.ProtoReflect.Descriptor instead.
 func (*RegisterChunkServerResponse) Descriptor() ([]byte, []int) {
 	return file_api_gfs_v1_master_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *RegisterChunkServerResponse) GetServerId() string {
+	if x != nil {
+		return x.ServerId
+	}
+	return ""
 }
 
 func (x *RegisterChunkServerResponse) GetAccepted() bool {
@@ -253,12 +253,12 @@ var File_api_gfs_v1_master_proto protoreflect.FileDescriptor
 
 const file_api_gfs_v1_master_proto_rawDesc = "" +
 	"\n" +
-	"\x17api/gfs/v1/master.proto\x12\x06gfs.v1\"S\n" +
-	"\x1aRegisterChunkServerRequest\x12\x1b\n" +
-	"\tserver_id\x18\x01 \x01(\tR\bserverId\x12\x18\n" +
-	"\aaddress\x18\x02 \x01(\tR\aaddress\"9\n" +
-	"\x1bRegisterChunkServerResponse\x12\x1a\n" +
-	"\baccepted\x18\x01 \x01(\bR\baccepted\"\x19\n" +
+	"\x17api/gfs/v1/master.proto\x12\x06gfs.v1\"6\n" +
+	"\x1aRegisterChunkServerRequest\x12\x18\n" +
+	"\aaddress\x18\x01 \x01(\tR\aaddress\"V\n" +
+	"\x1bRegisterChunkServerResponse\x12\x1b\n" +
+	"\tserver_id\x18\x01 \x01(\tR\bserverId\x12\x1a\n" +
+	"\baccepted\x18\x02 \x01(\bR\baccepted\"\x19\n" +
 	"\x17GetClusterStatusRequest\"X\n" +
 	"\x18GetClusterStatusResponse\x12<\n" +
 	"\rchunk_servers\x18\x01 \x03(\v2\x17.gfs.v1.ChunkServerInfoR\fchunkServers\"H\n" +
