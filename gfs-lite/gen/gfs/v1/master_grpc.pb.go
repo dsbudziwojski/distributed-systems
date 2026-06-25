@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	MasterService_RegisterChunkServer_FullMethodName = "/gfs.v1.MasterService/RegisterChunkServer"
 	MasterService_GetClusterStatus_FullMethodName    = "/gfs.v1.MasterService/GetClusterStatus"
+	MasterService_CreateFile_FullMethodName          = "/gfs.v1.MasterService/CreateFile"
 )
 
 // MasterServiceClient is the client API for MasterService service.
@@ -29,6 +30,7 @@ const (
 type MasterServiceClient interface {
 	RegisterChunkServer(ctx context.Context, in *RegisterChunkServerRequest, opts ...grpc.CallOption) (*RegisterChunkServerResponse, error)
 	GetClusterStatus(ctx context.Context, in *GetClusterStatusRequest, opts ...grpc.CallOption) (*GetClusterStatusResponse, error)
+	CreateFile(ctx context.Context, in *CreateFileRequest, opts ...grpc.CallOption) (*CreateFileResponse, error)
 }
 
 type masterServiceClient struct {
@@ -59,12 +61,23 @@ func (c *masterServiceClient) GetClusterStatus(ctx context.Context, in *GetClust
 	return out, nil
 }
 
+func (c *masterServiceClient) CreateFile(ctx context.Context, in *CreateFileRequest, opts ...grpc.CallOption) (*CreateFileResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateFileResponse)
+	err := c.cc.Invoke(ctx, MasterService_CreateFile_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MasterServiceServer is the server API for MasterService service.
 // All implementations must embed UnimplementedMasterServiceServer
 // for forward compatibility.
 type MasterServiceServer interface {
 	RegisterChunkServer(context.Context, *RegisterChunkServerRequest) (*RegisterChunkServerResponse, error)
 	GetClusterStatus(context.Context, *GetClusterStatusRequest) (*GetClusterStatusResponse, error)
+	CreateFile(context.Context, *CreateFileRequest) (*CreateFileResponse, error)
 	mustEmbedUnimplementedMasterServiceServer()
 }
 
@@ -80,6 +93,9 @@ func (UnimplementedMasterServiceServer) RegisterChunkServer(context.Context, *Re
 }
 func (UnimplementedMasterServiceServer) GetClusterStatus(context.Context, *GetClusterStatusRequest) (*GetClusterStatusResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetClusterStatus not implemented")
+}
+func (UnimplementedMasterServiceServer) CreateFile(context.Context, *CreateFileRequest) (*CreateFileResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateFile not implemented")
 }
 func (UnimplementedMasterServiceServer) mustEmbedUnimplementedMasterServiceServer() {}
 func (UnimplementedMasterServiceServer) testEmbeddedByValue()                       {}
@@ -138,6 +154,24 @@ func _MasterService_GetClusterStatus_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MasterService_CreateFile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateFileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MasterServiceServer).CreateFile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MasterService_CreateFile_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MasterServiceServer).CreateFile(ctx, req.(*CreateFileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // MasterService_ServiceDesc is the grpc.ServiceDesc for MasterService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -152,6 +186,10 @@ var MasterService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetClusterStatus",
 			Handler:    _MasterService_GetClusterStatus_Handler,
+		},
+		{
+			MethodName: "CreateFile",
+			Handler:    _MasterService_CreateFile_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

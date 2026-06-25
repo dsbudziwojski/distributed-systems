@@ -249,6 +249,206 @@ func (x *ChunkServerInfo) GetAddress() string {
 	return ""
 }
 
+type CreateFileRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Path          string                 `protobuf:"bytes,1,opt,name=path,proto3" json:"path,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateFileRequest) Reset() {
+	*x = CreateFileRequest{}
+	mi := &file_api_gfs_v1_master_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateFileRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateFileRequest) ProtoMessage() {}
+
+func (x *CreateFileRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_gfs_v1_master_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateFileRequest.ProtoReflect.Descriptor instead.
+func (*CreateFileRequest) Descriptor() ([]byte, []int) {
+	return file_api_gfs_v1_master_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *CreateFileRequest) GetPath() string {
+	if x != nil {
+		return x.Path
+	}
+	return ""
+}
+
+type CreateFileResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	FileInfo      *FileInfo              `protobuf:"bytes,1,opt,name=file_info,json=fileInfo,proto3" json:"file_info,omitempty"`
+	Ok            string                 `protobuf:"bytes,2,opt,name=ok,proto3" json:"ok,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateFileResponse) Reset() {
+	*x = CreateFileResponse{}
+	mi := &file_api_gfs_v1_master_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateFileResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateFileResponse) ProtoMessage() {}
+
+func (x *CreateFileResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_gfs_v1_master_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateFileResponse.ProtoReflect.Descriptor instead.
+func (*CreateFileResponse) Descriptor() ([]byte, []int) {
+	return file_api_gfs_v1_master_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *CreateFileResponse) GetFileInfo() *FileInfo {
+	if x != nil {
+		return x.FileInfo
+	}
+	return nil
+}
+
+func (x *CreateFileResponse) GetOk() string {
+	if x != nil {
+		return x.Ok
+	}
+	return ""
+}
+
+type FileInfo struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Path          string                 `protobuf:"bytes,1,opt,name=path,proto3" json:"path,omitempty"`
+	Chunks        []*ChunkInfo           `protobuf:"bytes,2,rep,name=chunks,proto3" json:"chunks,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *FileInfo) Reset() {
+	*x = FileInfo{}
+	mi := &file_api_gfs_v1_master_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FileInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FileInfo) ProtoMessage() {}
+
+func (x *FileInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_api_gfs_v1_master_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FileInfo.ProtoReflect.Descriptor instead.
+func (*FileInfo) Descriptor() ([]byte, []int) {
+	return file_api_gfs_v1_master_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *FileInfo) GetPath() string {
+	if x != nil {
+		return x.Path
+	}
+	return ""
+}
+
+func (x *FileInfo) GetChunks() []*ChunkInfo {
+	if x != nil {
+		return x.Chunks
+	}
+	return nil
+}
+
+type ChunkInfo struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ChunkHandle   string                 `protobuf:"bytes,1,opt,name=chunk_handle,json=chunkHandle,proto3" json:"chunk_handle,omitempty"`
+	Address       string                 `protobuf:"bytes,2,opt,name=address,proto3" json:"address,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ChunkInfo) Reset() {
+	*x = ChunkInfo{}
+	mi := &file_api_gfs_v1_master_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ChunkInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ChunkInfo) ProtoMessage() {}
+
+func (x *ChunkInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_api_gfs_v1_master_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ChunkInfo.ProtoReflect.Descriptor instead.
+func (*ChunkInfo) Descriptor() ([]byte, []int) {
+	return file_api_gfs_v1_master_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *ChunkInfo) GetChunkHandle() string {
+	if x != nil {
+		return x.ChunkHandle
+	}
+	return ""
+}
+
+func (x *ChunkInfo) GetAddress() string {
+	if x != nil {
+		return x.Address
+	}
+	return ""
+}
+
 var File_api_gfs_v1_master_proto protoreflect.FileDescriptor
 
 const file_api_gfs_v1_master_proto_rawDesc = "" +
@@ -264,10 +464,23 @@ const file_api_gfs_v1_master_proto_rawDesc = "" +
 	"\rchunk_servers\x18\x01 \x03(\v2\x17.gfs.v1.ChunkServerInfoR\fchunkServers\"H\n" +
 	"\x0fChunkServerInfo\x12\x1b\n" +
 	"\tserver_id\x18\x01 \x01(\tR\bserverId\x12\x18\n" +
-	"\aaddress\x18\x02 \x01(\tR\aaddress2\xc6\x01\n" +
+	"\aaddress\x18\x02 \x01(\tR\aaddress\"'\n" +
+	"\x11CreateFileRequest\x12\x12\n" +
+	"\x04path\x18\x01 \x01(\tR\x04path\"S\n" +
+	"\x12CreateFileResponse\x12-\n" +
+	"\tfile_info\x18\x01 \x01(\v2\x10.gfs.v1.FileInfoR\bfileInfo\x12\x0e\n" +
+	"\x02ok\x18\x02 \x01(\tR\x02ok\"I\n" +
+	"\bFileInfo\x12\x12\n" +
+	"\x04path\x18\x01 \x01(\tR\x04path\x12)\n" +
+	"\x06chunks\x18\x02 \x03(\v2\x11.gfs.v1.ChunkInfoR\x06chunks\"H\n" +
+	"\tChunkInfo\x12!\n" +
+	"\fchunk_handle\x18\x01 \x01(\tR\vchunkHandle\x12\x18\n" +
+	"\aaddress\x18\x02 \x01(\tR\aaddress2\x8b\x02\n" +
 	"\rMasterService\x12^\n" +
 	"\x13RegisterChunkServer\x12\".gfs.v1.RegisterChunkServerRequest\x1a#.gfs.v1.RegisterChunkServerResponse\x12U\n" +
-	"\x10GetClusterStatus\x12\x1f.gfs.v1.GetClusterStatusRequest\x1a .gfs.v1.GetClusterStatusResponseB4Z2github.com/dsbudziwojski/gfs-lite/gen/gfs/v1;gfsv1b\x06proto3"
+	"\x10GetClusterStatus\x12\x1f.gfs.v1.GetClusterStatusRequest\x1a .gfs.v1.GetClusterStatusResponse\x12C\n" +
+	"\n" +
+	"CreateFile\x12\x19.gfs.v1.CreateFileRequest\x1a\x1a.gfs.v1.CreateFileResponseB4Z2github.com/dsbudziwojski/gfs-lite/gen/gfs/v1;gfsv1b\x06proto3"
 
 var (
 	file_api_gfs_v1_master_proto_rawDescOnce sync.Once
@@ -281,25 +494,33 @@ func file_api_gfs_v1_master_proto_rawDescGZIP() []byte {
 	return file_api_gfs_v1_master_proto_rawDescData
 }
 
-var file_api_gfs_v1_master_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_api_gfs_v1_master_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_api_gfs_v1_master_proto_goTypes = []any{
 	(*RegisterChunkServerRequest)(nil),  // 0: gfs.v1.RegisterChunkServerRequest
 	(*RegisterChunkServerResponse)(nil), // 1: gfs.v1.RegisterChunkServerResponse
 	(*GetClusterStatusRequest)(nil),     // 2: gfs.v1.GetClusterStatusRequest
 	(*GetClusterStatusResponse)(nil),    // 3: gfs.v1.GetClusterStatusResponse
 	(*ChunkServerInfo)(nil),             // 4: gfs.v1.ChunkServerInfo
+	(*CreateFileRequest)(nil),           // 5: gfs.v1.CreateFileRequest
+	(*CreateFileResponse)(nil),          // 6: gfs.v1.CreateFileResponse
+	(*FileInfo)(nil),                    // 7: gfs.v1.FileInfo
+	(*ChunkInfo)(nil),                   // 8: gfs.v1.ChunkInfo
 }
 var file_api_gfs_v1_master_proto_depIdxs = []int32{
 	4, // 0: gfs.v1.GetClusterStatusResponse.chunk_servers:type_name -> gfs.v1.ChunkServerInfo
-	0, // 1: gfs.v1.MasterService.RegisterChunkServer:input_type -> gfs.v1.RegisterChunkServerRequest
-	2, // 2: gfs.v1.MasterService.GetClusterStatus:input_type -> gfs.v1.GetClusterStatusRequest
-	1, // 3: gfs.v1.MasterService.RegisterChunkServer:output_type -> gfs.v1.RegisterChunkServerResponse
-	3, // 4: gfs.v1.MasterService.GetClusterStatus:output_type -> gfs.v1.GetClusterStatusResponse
-	3, // [3:5] is the sub-list for method output_type
-	1, // [1:3] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	7, // 1: gfs.v1.CreateFileResponse.file_info:type_name -> gfs.v1.FileInfo
+	8, // 2: gfs.v1.FileInfo.chunks:type_name -> gfs.v1.ChunkInfo
+	0, // 3: gfs.v1.MasterService.RegisterChunkServer:input_type -> gfs.v1.RegisterChunkServerRequest
+	2, // 4: gfs.v1.MasterService.GetClusterStatus:input_type -> gfs.v1.GetClusterStatusRequest
+	5, // 5: gfs.v1.MasterService.CreateFile:input_type -> gfs.v1.CreateFileRequest
+	1, // 6: gfs.v1.MasterService.RegisterChunkServer:output_type -> gfs.v1.RegisterChunkServerResponse
+	3, // 7: gfs.v1.MasterService.GetClusterStatus:output_type -> gfs.v1.GetClusterStatusResponse
+	6, // 8: gfs.v1.MasterService.CreateFile:output_type -> gfs.v1.CreateFileResponse
+	6, // [6:9] is the sub-list for method output_type
+	3, // [3:6] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_api_gfs_v1_master_proto_init() }
@@ -313,7 +534,7 @@ func file_api_gfs_v1_master_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_gfs_v1_master_proto_rawDesc), len(file_api_gfs_v1_master_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
