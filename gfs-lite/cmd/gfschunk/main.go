@@ -23,11 +23,6 @@ func main() {
 		log.Fatalf("failed to listen: %v", err)
 	}
 
-	server := grpc.NewServer()
-	chunkServer := chunkserver.NewServer(100)
-	gfsv1.RegisterChunkServiceServer(server, chunkServer)
-	log.Println("gfschunkserver listening on " + *addr)
-
 	conn, err := grpc.NewClient(
 		*master,
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
@@ -51,5 +46,11 @@ func main() {
 	}
 	log.Printf("registration accepted: %v", out.Accepted)
 	log.Printf("id: %v", out.ServerId)
+
+	server := grpc.NewServer()
+	chunkServer := chunkserver.NewServer(100, out.ServerId)
+	gfsv1.RegisterChunkServiceServer(server, chunkServer)
+	log.Println("gfschunkserver listening on " + *addr)
+
 	log.Fatal(server.Serve(lis))
 }

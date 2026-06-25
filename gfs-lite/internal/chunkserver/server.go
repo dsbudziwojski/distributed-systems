@@ -19,13 +19,14 @@ type chunkServer struct {
 	chunkSize int64
 }
 
-func NewServer(chunkSize int64) *chunkServer {
-	err := os.MkdirAll("data/chunkserver", 0755)
+func NewServer(chunkSize int64, chunkserverId string) *chunkServer {
+	BasePath := "data/chunkservers/" + chunkserverId
+	err := os.MkdirAll(BasePath, 0755)
 	if err != nil {
 		log.Fatal(err)
 	}
 	server := &chunkServer{
-		basePath:  "data/chunkserver",
+		basePath:  BasePath,
 		chunkSize: chunkSize,
 	}
 	return server
